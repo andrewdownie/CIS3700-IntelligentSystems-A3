@@ -1,7 +1,12 @@
 public class DTLearn{
 
     public static void main(String[] args){
-        System.out.println("woof");         
+        Example.Test();
+        Node.Test();
+        Sample.Test();
+        Scheme.Test();
+        UTIL.Test();
+        
     }
 
 } 
