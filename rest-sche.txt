@@ -1,0 +1,45 @@
+11
+
+alternate
+2
+YES NO
+
+waitArea
+2
+YES NO
+
+friOrSat
+2
+YES NO
+
+hungry
+2
+YES NO
+
+customer
+3
+NONE SOME FULL
+
+price
+3
+$ $$ $$$
+
+raining
+2
+YES NO
+
+reserved
+2
+YES NO
+
+foodType
+4
+FRENCH THAI BURGER ITALIAN
+
+waitTime
+4
+0-10 10-30 30-60 >60
+
+willWait
+2
+YES NO
