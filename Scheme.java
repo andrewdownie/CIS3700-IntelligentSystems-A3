@@ -32,24 +32,15 @@ public class Scheme{
 
     }
 
-    public bool AttHasValue(int index, String value){
-        if(index >= attList.size()){
-            return false;
-        }
+   
+    public String toString(){
+        String output = "";
 
-        for(String val: attList.get(i).values){
-            if(val.equals(value)){
-                return true;
-            }
-        }
-        
-        return false;
-    }
-
-    public void PrintAttributes(){
         for(int i = 0; i < attList.size(); i++){
-            System.out.println(attList.get(i).toString());
+            output += attList.get(i).toString() + "\n";
         }
+
+        return output;
     }
 
 }

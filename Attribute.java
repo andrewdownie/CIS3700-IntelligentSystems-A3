@@ -13,6 +13,16 @@ public class Attribute{
         this.values = tempValues;
     }
 
+public boolean AttHasValue(String value){
+
+    for(String val: values){
+        if(val.equals(value)){
+            return true;
+        }
+    }
+
+    return false;
+}
 
     public String toString(){
         String output = name + ": {";
