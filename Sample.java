@@ -40,12 +40,13 @@ public class Sample{
         ///
         String[] currentExampleLine;
         String currentAttribute;
-        int[] attributeIndexList = new int[scheme.attList.size()];
+        int[] attributeIndexList;
         int currentAttributeIndex;
 
         //: Go through each example
         for(int i = 1; i < exampleFileLines.length; i++){
             currentExampleLine = exampleFileLines[i].trim().split("[ ]+", -1);
+            attributeIndexList = new int[scheme.attList.size()];
 
             //: Go through each value of the current example
             for(int j = 0; j < currentExampleLine.length; j++){
@@ -83,10 +84,6 @@ public class Sample{
 
             for(int j = 0; j < exampleList.get(i).values.length; j++){
                 int curIndex = exampleList.get(i).values[j];
-                System.out.println("Cur index: " + curIndex);
-
-
-                // It seems like its just reading the first line over and over again...
 
                 output += scheme.attList.get(j).values[curIndex]; 
 
