@@ -37,15 +37,17 @@ public class Sample{
         //: Go through each example
         for(int i = 1; i < exampleFileLines.length; i++){
             currentLine = exampleFileLines[i].trim().split("[ ]+", -1);
-            System.out.println("\ncurrentLine: " + exampleFileLines[i]);
+            //System.out.println("\ncurrentLine: " + exampleFileLines[i]);
 
             //: Go through each value of the current example
             for(int j = 0; j < currentLine.length; j++){
                 currentAttribute = currentLine[j];
-                System.out.println("Current att: " + currentAttribute);
-                //if(!scheme.attList.get(j).ContainsValue(currentAttribute)){
-                    //System.out.println("j: " + scheme.attList.get(i).name + ", does not contain: " + currentAttribute);
-                //}
+                //System.out.println("Current att: " + currentAttribute);
+                if(!scheme.attList.get(j).ContainsValue(currentAttribute)){
+                    System.out.println("Attribute: " + scheme.attList.get(j).name + ", does not contain value: " + currentAttribute);
+                    System.out.println("Exiiting...");
+                    System.exit(5);
+                }
                 //Compare current attribute value to possible attribute values for the attribute at the current index
             }
         }
