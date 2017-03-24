@@ -22,7 +22,7 @@ public class DTLearn{
         /// Scheme setup
         ///
         Scheme scheme = new Scheme(scheme_contents);
-
+        scheme.PrintAttributes();
 
     }
 

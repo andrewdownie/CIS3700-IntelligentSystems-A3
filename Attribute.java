@@ -6,9 +6,26 @@ public class Attribute{
     String name;
     String[] values;
     
-    public Attribute(String name, String[] values){
+    public Attribute(String name, int valueCount, String values){
         this.name = name;
-        this.values = values;
+
+        String[] tempValues = values.split(" ");
+        this.values = tempValues;
     }
+
+
+    public String toString(){
+        String output = name + ": {";
+
+        for(int i = 0; i < values.length; i++){
+            output += values[i];
+            if(i < values.length - 1){
+                output += ", ";
+            }
+        }
+        output += "}";
+
+        return output;
+    } 
 
 }
