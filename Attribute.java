@@ -13,16 +13,17 @@ public class Attribute{
         this.values = tempValues;
     }
 
-public boolean ContainsValue(String value){
 
-    for(String val: values){
-        if(val.equals(value)){
-            return true;
+    public int IndexOfValue(String value){
+
+        for(int i = 0; i < values.length; i++){
+            if(values[i].equals(value)){
+                return i;
+            }
         }
-    }
 
-    return false;
-}
+        return -1;
+    }
 
     public String toString(){
         String output = name + ": {";

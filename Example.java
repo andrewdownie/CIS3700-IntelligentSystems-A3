@@ -1,8 +1,8 @@
 public class Example{
-    String[] values;    
+    int[] values;    
 
 
-    public Example(String[] example){
+    public Example(int[] example){
         values = example; 
     }
 

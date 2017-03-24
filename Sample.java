@@ -9,6 +9,7 @@ public class Sample{
     public Sample(Scheme scheme, String sampleFileContents){
         String[] exampleFileLines = sampleFileContents.split("[\\r\\n]+");    
         exampleList = new LinkedList<Example>();
+        this.scheme = scheme;
 
         ///
         /// Split the first line into the list of attributes used
@@ -39,6 +40,8 @@ public class Sample{
         ///
         String[] currentExampleLine;
         String currentAttribute;
+        int[] attributeIndexList = new int[scheme.attList.size()];
+        int currentAttributeIndex;
 
         //: Go through each example
         for(int i = 1; i < exampleFileLines.length; i++){
@@ -47,30 +50,58 @@ public class Sample{
             //: Go through each value of the current example
             for(int j = 0; j < currentExampleLine.length; j++){
                 currentAttribute = currentExampleLine[j];
-                if(!scheme.attList.get(j).ContainsValue(currentAttribute)){
+
+                currentAttributeIndex = scheme.attList.get(j).IndexOfValue(currentAttribute);
+
+                if(currentAttributeIndex < 0){
                     System.out.println("Attribute: " + scheme.attList.get(j).name + ", does not contain value: " + currentAttribute);
-                    System.out.println("Exiiting...");
+                    System.out.println("Exiting...");
                     System.exit(5);
                 }
+
+                attributeIndexList[j] = currentAttributeIndex;
 
             }
 
 
-            exampleList.add(new Example(currentExampleLine));
+            exampleList.add(new Example(attributeIndexList));
         }
 
         
     }
 
 
+
+    ///
+    /// toString
+    ///         : map the indicies of the examples, to the attribute values they correspond to 
     public String toString(){
         String output = "Example list:\n";
 
         for(int i = 0; i < exampleList.size(); i++){
-            output += "\tExample" + i + ":\t" + exampleList.get(i).toString() + "\n";
+            output += "\tExample" + i + ":\t{";
+
+            for(int j = 0; j < exampleList.get(i).values.length; j++){
+                int curIndex = exampleList.get(i).values[j];
+                System.out.println("Cur index: " + curIndex);
+
+
+                // It seems like its just reading the first line over and over again...
+
+                output += scheme.attList.get(j).values[curIndex]; 
+
+                if(j < exampleList.get(i).values.length - 1){
+                    output += ", ";
+                }
+            }
+
+            output += "}\n";
         }
 
         return output;
     }
+    
+
+    /// getInfo, getRemainder, getAttribute
 
 }
