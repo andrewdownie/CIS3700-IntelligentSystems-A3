@@ -1,4 +1,4 @@
-alternate waitArea friOrSat hungry customer price raining reserved foodType waitTime willWait
+alternate waitArea friOrSat hungry customer price raining reserved foodType waitTime willWaitt
 YES  NO  NO YES SOME $$$  NO YES  FRENCH  0-10 YES
 YES  NO  NO YES FULL   $  NO  NO    THAI 30-60  NO
  NO YES  NO  NO SOME   $  NO  NO  BURGER  0-10 YES

@@ -22,7 +22,13 @@ public class DTLearn{
         /// Scheme setup
         ///
         Scheme scheme = new Scheme(scheme_contents);
-        scheme.PrintAttributes();
+        //scheme.PrintAttributes();
+
+        ///
+        /// Example setup
+        ///
+        Sample sample = new Sample(scheme, data_contents);
+        //example.PrintSamples();
 
     }
 
