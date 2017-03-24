@@ -36,7 +36,7 @@ public class Sample{
 
         //: Go through each example
         for(int i = 1; i < exampleFileLines.length; i++){
-            currentLine = exampleFileLines[i].split("[ ]+");
+            currentLine = exampleFileLines[i].trim().split("[ ]+", -1);
             System.out.println("\ncurrentLine: " + exampleFileLines[i]);
 
             //: Go through each value of the current example
