@@ -13,7 +13,7 @@ public class Attribute{
         this.values = tempValues;
     }
 
-public boolean AttHasValue(String value){
+public boolean ContainsValue(String value){
 
     for(String val: values){
         if(val.equals(value)){

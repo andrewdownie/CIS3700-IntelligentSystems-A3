@@ -22,13 +22,12 @@ public class DTLearn{
         /// Scheme setup
         ///
         Scheme scheme = new Scheme(scheme_contents);
-        System.out.println(scheme);
+        //System.out.println(scheme);
 
         ///
         /// Example setup
         ///
         Sample sample = new Sample(scheme, data_contents);
-        //example.PrintSamples();
 
     }
 
