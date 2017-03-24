@@ -1,8 +1,14 @@
+import java.util.LinkedList;
+import java.util.List;
+import java.util.*;
+
 public class Sample{
     Scheme scheme;
+    List<Example> exampleList;
 
     public Sample(Scheme scheme, String sampleFileContents){
         String[] exampleFileLines = sampleFileContents.split("[\\r\\n]+");    
+        exampleList = new LinkedList<Example>();
 
         ///
         /// Split the first line into the list of attributes used
@@ -31,25 +37,26 @@ public class Sample{
         ///
         /// Check for errors in each line of sample, and read the values into Examples
         ///
-        String[] currentLine;
+        String[] currentExampleLine;
         String currentAttribute;
 
         //: Go through each example
         for(int i = 1; i < exampleFileLines.length; i++){
-            currentLine = exampleFileLines[i].trim().split("[ ]+", -1);
-            //System.out.println("\ncurrentLine: " + exampleFileLines[i]);
+            currentExampleLine = exampleFileLines[i].trim().split("[ ]+", -1);
 
             //: Go through each value of the current example
-            for(int j = 0; j < currentLine.length; j++){
-                currentAttribute = currentLine[j];
-                //System.out.println("Current att: " + currentAttribute);
+            for(int j = 0; j < currentExampleLine.length; j++){
+                currentAttribute = currentExampleLine[j];
                 if(!scheme.attList.get(j).ContainsValue(currentAttribute)){
                     System.out.println("Attribute: " + scheme.attList.get(j).name + ", does not contain value: " + currentAttribute);
                     System.out.println("Exiiting...");
                     System.exit(5);
                 }
-                //Compare current attribute value to possible attribute values for the attribute at the current index
+
             }
+
+
+            exampleList.add(new Example(currentExampleLine));
         }
 
         
@@ -57,7 +64,13 @@ public class Sample{
 
 
     public String toString(){
-        return "unimplemented to string of sample class";
+        String output = "Example list:\n";
+
+        for(int i = 0; i < exampleList.size(); i++){
+            output += "\tExample" + i + ":\t" + exampleList.get(i).toString() + "\n";
+        }
+
+        return output;
     }
 
 }
