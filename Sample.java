@@ -105,26 +105,33 @@ public class Sample{
     }
 
 
-    public double infoFmGp(){
-        int size = exampleList.size();
-        int k = scheme.functionOutput.values.length; 
-        int[] count = new int[scheme.functionOutput.values.length];
+    private int[] ExamplesWithOutput(){
+        int outputCount = scheme.functionOutput.values.length;
+        int[] count = new int[outputCount];
 
-
-        for(int j = 0; j < k; j++){//: Go through each function output 
-            for(int i = 0; i < size; i++){//: go through each example in the group
-
-                int index = g.get(i).values[g.get(i).values.length-1];
-                String attribute = scheme.attList.get(j).name;
-                //System.out.println(attribute);
-
-                if(attribute.equals(g.get(i).values[index])){
-                    count[j]++; 
+        for(int i = 0; i < outputCount; i++){
+            for(Example e: exampleList){
+                if(e.functionOutput() == i){
+                    count[i]++;
                 }
-
             }
         }
 
+
+        return count;
+    }
+
+
+    public double infoFmGp(){
+        int size = exampleList.size();
+        int k = scheme.functionOutput.values.length; 
+        int[] count;
+
+        count = ExamplesWithOutput();
+
+        for(int i: count){
+            System.out.println(i);
+        }
 
         double I = 0;
         for(int j = 0; j < k; j++){

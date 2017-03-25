@@ -7,6 +7,10 @@ public class Example{
         values = example; 
     }
 
+    public int functionOutput(){
+        return values[values.length - 1];
+    }
+
     public String toString(){
         String output = "{";
 
