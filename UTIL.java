@@ -31,7 +31,7 @@ public class UTIL{
 
     ///
     /// ReadEntireFile
-    ///         : Given a full or relative path to a file, return the entirety of file contents as a string array, 
+    ///         : Given a full or relative path to a file, return the entirety of file contents as a string, 
     public static String ReadEntireFile(String filePath){
             String fileContents = "";
 

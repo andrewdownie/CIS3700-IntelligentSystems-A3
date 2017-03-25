@@ -8,6 +8,7 @@ public class Scheme{
 
 
     List<Attribute> attList;
+    Attribute functionOutput;
 
     public Scheme(String schemeFileContents){
         attList = new LinkedList<Attribute>();
@@ -21,14 +22,16 @@ public class Scheme{
 
         attributeCount = Integer.parseInt(schemeFileLines[0]);
 
-        for(int i = 1; i < attributeCount * 3; i+=3){
+        for(int i = 1; i < attributeCount  * 3; i+=3){
             attName = schemeFileLines[i + 0];
             attValCount = Integer.parseInt(schemeFileLines[i + 1]);
             attValues = schemeFileLines[i + 2];
 
             attList.add(new Attribute(attName, attValCount, attValues));
-
         }
+
+        functionOutput = attList.get(attList.size() - 1);
+
 
     }
 

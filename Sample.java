@@ -1,6 +1,8 @@
 import java.util.LinkedList;
+import java.lang.Math.*;
 import java.util.List;
 import java.util.*;
+import static java.lang.System.out;
 
 public class Sample{
     Scheme scheme;
@@ -96,6 +98,47 @@ public class Sample{
         }
 
         return output;
+    }
+
+    public void getRemainder(List<Attribute> a){
+
+    }
+
+
+    public double infoFmGp(){
+        int size = exampleList.size();
+        int k = scheme.functionOutput.values.length; 
+        int[] count = new int[scheme.functionOutput.values.length];
+
+
+        for(int j = 0; j < k; j++){//: Go through each function output 
+            for(int i = 0; i < size; i++){//: go through each example in the group
+
+                int index = g.get(i).values[g.get(i).values.length-1];
+                String attribute = scheme.attList.get(j).name;
+                //System.out.println(attribute);
+
+                if(attribute.equals(g.get(i).values[index])){
+                    count[j]++; 
+                }
+
+            }
+        }
+
+
+        double I = 0;
+        for(int j = 0; j < k; j++){
+            double ratio = count[j] / size;
+            I = I - (ratio * Log2(ratio));
+
+            //System.out.println("Count: " + count[j] + ", Ratio: " + ratio + ", logged: " + I); 
+        }
+
+        return I;
+    }
+
+    private double Log2(double value){
+        return Math.log(value) / Math.log(2);
     }
     
 

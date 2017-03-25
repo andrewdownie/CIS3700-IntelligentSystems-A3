@@ -28,8 +28,12 @@ public class DTLearn{
         /// Example setup
         ///
         Sample sample = new Sample(scheme, data_contents);
-        System.out.println(sample);
+        //System.out.println(sample);
 
+
+
+        //Test infoFmGp(...)
+        System.out.println(sample.infoFmGp());
     }
 
 
