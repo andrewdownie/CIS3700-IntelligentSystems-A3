@@ -105,7 +105,10 @@ public class Sample{
     }
 
 
-    private int[] ExamplesWithOutput(){
+    ///
+    /// CountOuputOfExamples
+    ///         : Go through each possible function output, and tally the number of examples that share that function output
+    private int[] CountOuputOfExamples(){
         int outputCount = scheme.functionOutput.values.length;
         int[] count = new int[outputCount];
 
@@ -123,22 +126,17 @@ public class Sample{
 
 
     public double infoFmGp(){
+        int outputCount = scheme.functionOutput.values.length; 
         int size = exampleList.size();
-        int k = scheme.functionOutput.values.length; 
         int[] count;
 
-        count = ExamplesWithOutput();
+        count = CountOuputOfExamples();
 
-        for(int i: count){
-            System.out.println(i);
-        }
 
         double I = 0;
-        for(int j = 0; j < k; j++){
-            double ratio = count[j] / size;
+        for(int i = 0; i < outputCount; i++){
+            double ratio = (double)count[i] / size;
             I = I - (ratio * Log2(ratio));
-
-            //System.out.println("Count: " + count[j] + ", Ratio: " + ratio + ", logged: " + I); 
         }
 
         return I;
