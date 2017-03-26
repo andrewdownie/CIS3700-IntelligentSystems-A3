@@ -115,20 +115,35 @@ public class Sample{
         return output;
     }
 
-    public void getRemainder(Attribute a){
+    public double getRemainder(Attribute a){
         int size = exampleList.size();
         int m = a.values.length;
 
         Sample[] subSamples = CreateSubSamples(a);
 
 
-        for(Sample s: subSamples){
+        /*for(Sample s: subSamples){// Print what subsamples are being generated
             System.out.println(s.toString());
+        }*/
+
+        int[] subcnt = new int[m];
+
+        for(int i = 0; i < m; i++){
+            subcnt[i] = subSamples[i].exampleList.size();
         }
 
-        // split g by value of a, into subg [1..m];
-        //      -> so I think we are going to split this sample, into 1..m "subsamples"
-        // create subcnt[1..m]
+
+        double remainder = 0;
+        for(int i = 0; i < m; i++){
+            double pr = (double)subcnt[i]/size;
+            double I = (double)subSamples[i].infoFmGp(); 
+            remainder += (double)pr * I;
+
+            //System.out.println("pr:" + pr + ", I:" + I + ", remainder:" + remainder + ", size: " + size + ", subcnt:" + subcnt[i] + ", infoFmGp:" + subSamples[i].infoFmGp()); //TODO: print all the info you need 
+        }
+
+        return remainder;
+
     }
 
 
@@ -139,7 +154,7 @@ public class Sample{
 
         int m = splitter.values.length;
 
-        List<Example> tempList = new LinkedList<Example>();
+        List<Example> tempAttList = new LinkedList<Example>();
         int attIndex = scheme.AttributeIndex(splitter);
         Sample[] subSamples = new Sample[m];
 
@@ -148,13 +163,13 @@ public class Sample{
             for(Example e: exampleList){
 
                 if(i == e.values[attIndex]){
-                    tempList.add(e);
+                    tempAttList.add(e);
                 }
 
             }
 
-            subSamples[i] = new Sample(scheme, tempList, scheme.attList.get(attIndex).values[i]);
-            tempList = new LinkedList<Example>();
+            subSamples[i] = new Sample(scheme, tempAttList, scheme.attList.get(attIndex).values[i]);
+            tempAttList = new LinkedList<Example>();
         }
 
         return subSamples;
@@ -195,7 +210,10 @@ public class Sample{
         double I = 0;
         for(int i = 0; i < outputCount; i++){
             double ratio = (double)count[i] / size;
-            I = I - (ratio * Log2(ratio));
+            System.out.println(ratio);
+            if(ratio > 0){
+                I = I - (ratio * Log2(ratio));
+            }
         }
 
         return I;

@@ -31,12 +31,12 @@ public class DTLearn{
         //System.out.println(sample);
 
 
-        sample.getRemainder(scheme.attList.get(5));
+        System.out.println(sample.getRemainder(scheme.attList.get(5)));
 
 
 
         //Test infoFmGp(...)
-        System.out.println(sample.infoFmGp());
+        //System.out.println(sample.infoFmGp());
     }
 
 
