@@ -133,16 +133,20 @@ public class Sample{
     ///         : Breaks this sample into subsamples based on the given attribute
     private Sample[] CreateSubSamples(Attribute splitter){
         int m = splitter.values.length;
-        int k = scheme.functionOutput.values.length;
+        //int k = scheme.functionOutput.values.length;
+        int attIndex = scheme.AttributeIndex(splitter);
+
+
+        //need to know index of the attribute dont we?...
 
         Sample[] subSamples = new Sample[m];
 
         List<Example> tempList = new LinkedList<Example>();
 
-        for(int i = 0; i < k; i++){
+        for(int i = 0; i < m; i++){
             for(Example e: exampleList){
 
-                if(i == e.functionOutput()){
+                if(i == e.values[attIndex]){
                     tempList.add(e);
                 }
 

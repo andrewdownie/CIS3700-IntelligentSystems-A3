@@ -31,7 +31,7 @@ public class DTLearn{
         //System.out.println(sample);
 
 
-        sample.getRemainder(scheme.attList.get(0));
+        sample.getRemainder(scheme.attList.get(1));
 
 
 

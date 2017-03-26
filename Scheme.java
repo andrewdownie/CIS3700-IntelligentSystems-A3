@@ -35,6 +35,16 @@ public class Scheme{
 
     }
 
+    public int AttributeIndex(Attribute a){
+        for(int i = 0; i < attList.size(); i++){
+            if(attList.get(i).equals(a)){
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
    
     public String toString(){
         String output = "";
