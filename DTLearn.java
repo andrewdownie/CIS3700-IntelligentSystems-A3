@@ -41,4 +41,17 @@ public class DTLearn{
     }
 
 
+    //... I think sMajor is just a name that gets put on the node, so couldn't I just use the name from the current sample
+    private void learnDecisionTree(Sample g, Scheme attrib, String sMajor){
+
+        if(g.exampleList == null || g.exampleList.size()){
+            //return node labeled: sMajor
+        }
+
+        if(g.SingleOutput() > -1){
+            //return a node labeld majorityValue(g);
+        }
+
+    }
+
 } 

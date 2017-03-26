@@ -290,4 +290,41 @@ public class Sample{
     
 
 
+    ///
+    /// majorityValue
+    ///         : Finds the FVF of this sample, and returns its index 
+    public int MajorityValue(){
+        int[] count = CountOuputOfExamples(); 
+        int biggestIndex = -1;
+        int biggestCount = -1;
+
+
+        for(int i = 0; i < count.length; i++){
+            if(count[i] > biggestCount){
+                biggestCount = count[i];
+                biggestIndex = i;
+            }
+        }
+
+
+        return i;
+
+    }
+
+
+    ///
+    /// SingleOutput
+    ///
+    public int SingleOutput(){
+        int[] count = CountOuputOfExamples();
+
+        for(int i = 0; i < count.length; i++){
+            if(count[i] == exampleList.size()){
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
 }
