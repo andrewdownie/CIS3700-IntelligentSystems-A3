@@ -8,6 +8,9 @@ public class Sample{
     Scheme scheme;
     List<Example> exampleList;
 
+    ///
+    /// Sample
+    ///         : Create a sample from a scheme, and a text file filled with data that follows the scheme
     public Sample(Scheme scheme, String sampleFileContents){
         String[] exampleFileLines = sampleFileContents.split("[\\r\\n]+");    
         exampleList = new LinkedList<Example>();
@@ -74,6 +77,14 @@ public class Sample{
     }
 
 
+    ///
+    /// Sample
+    ///         : Create a sample from a scheme, and a list of examples that follow the scheme
+    public Sample(Scheme scheme, List<Example> exampleList){
+        this.exampleList = exampleList;
+        this.scheme = scheme;
+    }
+
 
     ///
     /// toString
@@ -100,14 +111,54 @@ public class Sample{
         return output;
     }
 
-    public void getRemainder(List<Attribute> a){
+    public void getRemainder(Attribute a){
+        int size = exampleList.size();
+        int m = a.values.length;
 
+        Sample[] subSamples = CreateSubSamples(a);
+
+
+        for(Sample s: subSamples){
+            System.out.println(s.toString());
+        }
+
+        // split g by value of a, into subg [1..m];
+        //      -> so I think we are going to split this sample, into 1..m "subsamples"
+        // create subcnt[1..m]
+    }
+
+
+    ///
+    /// CreateSubSamples
+    ///         : Breaks this sample into subsamples based on the given attribute
+    private Sample[] CreateSubSamples(Attribute splitter){
+        int m = splitter.values.length;
+        int k = scheme.functionOutput.values.length;
+
+        Sample[] subSamples = new Sample[m];
+
+        List<Example> tempList = new LinkedList<Example>();
+
+        for(int i = 0; i < k; i++){
+            for(Example e: exampleList){
+
+                if(i == e.functionOutput()){
+                    tempList.add(e);
+                }
+
+            }
+
+            subSamples[i] = new Sample(scheme, tempList);
+            tempList = new LinkedList<Example>();
+        }
+
+        return subSamples;
     }
 
 
     ///
     /// CountOuputOfExamples
-    ///         : Go through each possible function output, and tally the number of examples that share that function output
+    ///         : Go through each possible function output, and tally the number of examples that share that output result
     private int[] CountOuputOfExamples(){
         int outputCount = scheme.functionOutput.values.length;
         int[] count = new int[outputCount];
@@ -125,6 +176,9 @@ public class Sample{
     }
 
 
+    ///
+    /// infoFmGp
+    ///
     public double infoFmGp(){
         int outputCount = scheme.functionOutput.values.length; 
         int size = exampleList.size();
@@ -141,6 +195,8 @@ public class Sample{
 
         return I;
     }
+    
+
 
     private double Log2(double value){
         return Math.log(value) / Math.log(2);

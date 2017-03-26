@@ -31,6 +31,9 @@ public class DTLearn{
         //System.out.println(sample);
 
 
+        sample.getRemainder(scheme.attList.get(0));
+
+
 
         //Test infoFmGp(...)
         System.out.println(sample.infoFmGp());
