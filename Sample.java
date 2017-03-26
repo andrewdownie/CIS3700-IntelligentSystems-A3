@@ -7,11 +7,14 @@ import static java.lang.System.out;
 public class Sample{
     Scheme scheme;
     List<Example> exampleList;
+    String sampleName;
 
     ///
     /// Sample
     ///         : Create a sample from a scheme, and a text file filled with data that follows the scheme
     public Sample(Scheme scheme, String sampleFileContents){
+        sampleName = "Root";
+
         String[] exampleFileLines = sampleFileContents.split("[\\r\\n]+");    
         exampleList = new LinkedList<Example>();
         this.scheme = scheme;
@@ -80,8 +83,9 @@ public class Sample{
     ///
     /// Sample
     ///         : Create a sample from a scheme, and a list of examples that follow the scheme
-    public Sample(Scheme scheme, List<Example> exampleList){
+    public Sample(Scheme scheme, List<Example> exampleList, String sampleName){
         this.exampleList = exampleList;
+        this.sampleName = sampleName;
         this.scheme = scheme;
     }
 
@@ -90,7 +94,7 @@ public class Sample{
     /// toString
     ///         : map the indicies of the examples, to the attribute values they correspond to 
     public String toString(){
-        String output = "Example list:\n";
+        String output = "Example list(" + sampleName + "):\n";
 
         for(int i = 0; i < exampleList.size(); i++){
             output += "\tExample" + i + ":\t{";
@@ -132,16 +136,13 @@ public class Sample{
     /// CreateSubSamples
     ///         : Breaks this sample into subsamples based on the given attribute
     private Sample[] CreateSubSamples(Attribute splitter){
+
         int m = splitter.values.length;
-        //int k = scheme.functionOutput.values.length;
-        int attIndex = scheme.AttributeIndex(splitter);
-
-
-        //need to know index of the attribute dont we?...
-
-        Sample[] subSamples = new Sample[m];
 
         List<Example> tempList = new LinkedList<Example>();
+        int attIndex = scheme.AttributeIndex(splitter);
+        Sample[] subSamples = new Sample[m];
+
 
         for(int i = 0; i < m; i++){
             for(Example e: exampleList){
@@ -152,7 +153,7 @@ public class Sample{
 
             }
 
-            subSamples[i] = new Sample(scheme, tempList);
+            subSamples[i] = new Sample(scheme, tempList, scheme.attList.get(attIndex).values[i]);
             tempList = new LinkedList<Example>();
         }
 
