@@ -1,3 +1,7 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.*;
+
 public class DTLearn{
 
 
@@ -42,15 +46,36 @@ public class DTLearn{
 
 
     //... I think sMajor is just a name that gets put on the node, so couldn't I just use the name from the current sample
-    private void learnDecisionTree(Sample g, Scheme attrib, String sMajor){
+    private void learnDecisionTree(Sample g, List<Attribute> attrib, String sMajor){
 
-        if(g.exampleList == null || g.exampleList.size()){
+        if(g.exampleList == null || g.exampleList.size() == 0){
             //return node labeled: sMajor
         }
 
-        if(g.SingleOutput() > -1){
-            //return a node labeld majorityValue(g);
+        int singleOutput = g.SingleOutput();
+        if(singleOutput > -1){
+            //label the node singleOutput;
+            //return a node labeld q;
         }
+
+
+        if(attrib == null || attrib.size() == 0){
+            //int majorityVal = g.MajorityValue();
+            //return a node labelled majorityValue(g)
+        }
+
+
+        Attribute a = g.getAttribute(attrib);
+        
+        //tr = new Decision tree with the root a only;
+        //Sample tr = new Sample();
+
+        int m = g.MajorityValue();
+
+        for(String val: a.values){
+            System.out.println("Val is: " + val);
+        }
+
 
     }
 

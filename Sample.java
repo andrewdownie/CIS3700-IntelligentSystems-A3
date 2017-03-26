@@ -1,9 +1,9 @@
 import java.util.LinkedList;
-import java.util.Arrays;
 import java.lang.Math.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.*;
-import static java.lang.System.out;
+
 
 
 //TODO: do I need to minus one from k (scheme.attList.size()), since I include the function output in this list
@@ -291,7 +291,7 @@ public class Sample{
 
 
     ///
-    /// majorityValue
+    /// MajorityValue
     ///         : Finds the FVF of this sample, and returns its index 
     public int MajorityValue(){
         int[] count = CountOuputOfExamples(); 
@@ -307,14 +307,15 @@ public class Sample{
         }
 
 
-        return i;
+        return biggestIndex;
 
     }
 
 
+
     ///
     /// SingleOutput
-    ///
+    ///         : If all the examples share a single output, then the index of that output is returned, otherwise -1 is returned
     public int SingleOutput(){
         int[] count = CountOuputOfExamples();
 
@@ -326,5 +327,6 @@ public class Sample{
 
         return -1;
     }
+
 
 }
