@@ -31,7 +31,8 @@ public class DTLearn{
         //System.out.println(sample);
 
 
-        System.out.println(sample.getRemainder(scheme.attList.get(5)));
+        //System.out.println(sample.getRemainder(scheme.attList.get(5)));
+        System.out.println("Attribute choosen: " + sample.getAttribute(scheme.attList));
 
 
 

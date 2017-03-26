@@ -31,6 +31,7 @@ public class Scheme{
         }
 
         functionOutput = attList.get(attList.size() - 1);
+        attList.remove(attList.size() - 1);
 
 
     }

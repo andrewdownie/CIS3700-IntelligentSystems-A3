@@ -1,8 +1,12 @@
 import java.util.LinkedList;
+import java.util.Arrays;
 import java.lang.Math.*;
 import java.util.List;
 import java.util.*;
 import static java.lang.System.out;
+
+
+//TODO: do I need to minus one from k (scheme.attList.size()), since I include the function output in this list
 
 public class Sample{
     Scheme scheme;
@@ -23,10 +27,12 @@ public class Sample{
         /// Split the first line into the list of attributes used
         ///
         String[] attributes = exampleFileLines[0].split(" ");
+        String functionOutput = attributes[attributes.length - 1];
+        attributes = Arrays.copyOf(attributes, attributes.length-1);
 
 
         ///
-        /// Check for errors in the first line
+        /// Check for errors in the first line of data file
         ///
         if(attributes.length != scheme.attList.size()){
             System.out.println("Attributes provided in data file did not match the attributes provided in the attributes file");
@@ -40,6 +46,12 @@ public class Sample{
                 System.out.println("Exiting...");
                 System.exit(4);
             }
+        }
+
+        if(!functionOutput.equals(scheme.functionOutput.name)){
+            System.out.println("Function ouput definition(" + functionOutput + ") on first line of data file, did not match function output (" + scheme.functionOutput.name + ") definition of scheme file.");
+            System.out.println("Exitting...");
+            System.exit(5);
         }
 
 
@@ -56,7 +68,11 @@ public class Sample{
             currentExampleLine = exampleFileLines[i].trim().split("[ ]+", -1);
             attributeIndexList = new int[scheme.attList.size()];
 
-            //: Go through each value of the current example
+            String currentExampleOutput = currentExampleLine[currentExampleLine.length - 1];
+            currentExampleLine = Arrays.copyOf(currentExampleLine, currentExampleLine.length - 1);
+
+
+            //: Go through each attribute value of the current example (including class / output)
             for(int j = 0; j < currentExampleLine.length; j++){
                 currentAttribute = currentExampleLine[j];
 
@@ -72,7 +88,18 @@ public class Sample{
 
             }
 
+            //: validate function output
+            currentAttributeIndex = scheme.functionOutput.IndexOfValue(currentExampleOutput);
 
+            if(currentAttributeIndex < 0){
+                System.out.println("Attribute: " + scheme.functionOutput.name + ", does not contain value: " + currentExampleOutput);
+                System.out.println("Exiting...");
+                System.exit(5);
+            }
+
+            attributeIndexList[attributeIndexList.length - 1] = currentAttributeIndex;
+
+            //: Create new example from the int list representing attribute values, and then add the new example to this scheme's list of attributes
             exampleList.add(new Example(attributeIndexList));
         }
 
@@ -137,7 +164,9 @@ public class Sample{
         for(int i = 0; i < m; i++){
             double pr = (double)subcnt[i]/size;
             double I = (double)subSamples[i].infoFmGp(); 
-            remainder += (double)pr * I;
+            if(pr > 0){
+                remainder += (double)pr * I;
+            }
 
             //System.out.println("pr:" + pr + ", I:" + I + ", remainder:" + remainder + ", size: " + size + ", subcnt:" + subcnt[i] + ", infoFmGp:" + subSamples[i].infoFmGp()); //TODO: print all the info you need 
         }
@@ -206,11 +235,15 @@ public class Sample{
 
         count = CountOuputOfExamples();
 
+        if(size == 0){
+            return 0;
+        }
+
 
         double I = 0;
         for(int i = 0; i < outputCount; i++){
             double ratio = (double)count[i] / size;
-            System.out.println(ratio);
+            //System.out.println("Ratio: " + ratio + ",\t---- count[i]: " + count[i] + ", size: " + size);
             if(ratio > 0){
                 I = I - (ratio * Log2(ratio));
             }
@@ -220,12 +253,41 @@ public class Sample{
     }
     
 
+    ///
+    /// getAttribute
+    ///
+    public Attribute getAttribute(List<Attribute> attrib){
+        int k = scheme.attList.size() - 1;
+        double I = infoFmGp();
+
+        System.out.println(" --- Looking for best attribute");
+
+        Attribute bestA = null;
+        double remainder = 0;
+        double maxGain = -1;
+        double gain = 0;
+
+
+        for(Attribute a: attrib){
+            remainder = getRemainder(a);
+            gain = I - remainder;
+            if(gain > maxGain){
+                maxGain = gain;
+                bestA = a;
+                System.out.println("\t new bestA: " + bestA.name + ", with a gain of: " + maxGain); 
+            }
+
+        }
+
+
+        return bestA;
+    }
+
 
     private double Log2(double value){
         return Math.log(value) / Math.log(2);
     }
     
 
-    /// getInfo, getRemainder, getAttribute
 
 }
