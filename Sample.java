@@ -11,14 +11,11 @@ import java.util.*;
 public class Sample{
     Scheme scheme;
     List<Example> exampleList;
-    String sampleName;
 
     ///
     /// Sample
     ///         : Create a sample from a scheme, and a text file filled with data that follows the scheme
     public Sample(Scheme scheme, String sampleFileContents){
-        sampleName = "Root";
-
         String[] exampleFileLines = sampleFileContents.split("[\\r\\n]+");    
         exampleList = new LinkedList<Example>();
         this.scheme = scheme;
@@ -90,6 +87,7 @@ public class Sample{
 
             //: validate function output
             currentAttributeIndex = scheme.functionOutput.IndexOfValue(currentExampleOutput);
+            System.out.println(currentExampleOutput + " : " + currentAttributeIndex);
 
             if(currentAttributeIndex < 0){
                 System.out.println("Attribute: " + scheme.functionOutput.name + ", does not contain value: " + currentExampleOutput);
@@ -110,9 +108,8 @@ public class Sample{
     ///
     /// Sample
     ///         : Create a sample from a scheme, and a list of examples that follow the scheme
-    public Sample(Scheme scheme, List<Example> exampleList, String sampleName){
+    public Sample(Scheme scheme, List<Example> exampleList){
         this.exampleList = exampleList;
-        this.sampleName = sampleName;
         this.scheme = scheme;
     }
 
@@ -121,7 +118,7 @@ public class Sample{
     /// toString
     ///         : map the indicies of the examples, to the attribute values they correspond to 
     public String toString(){
-        String output = "Example list(" + sampleName + "):\n";
+        String output = "Example list:\n";
 
         for(int i = 0; i < exampleList.size(); i++){
             output += "\tExample" + i + ":\t{";
@@ -136,6 +133,8 @@ public class Sample{
                 }
             }
 
+            output += ", " + exampleList.get(exampleList.size() - 1).values[0];
+
             output += "}\n";
         }
 
@@ -147,6 +146,10 @@ public class Sample{
         int m = a.values.length;
 
         Sample[] subSamples = CreateSubSamples(a);
+
+        for(Sample s: subSamples){
+            //System.out.println("S is: " + s);
+        }
 
 
         /*for(Sample s: subSamples){// Print what subsamples are being generated
@@ -160,17 +163,27 @@ public class Sample{
         }
 
 
+        System.out.println("----");
+
+        System.out.println("Breaking on: " + a.name);
+
         double remainder = 0;
         for(int i = 0; i < m; i++){
+
             double pr = (double)subcnt[i]/size;
             double I = (double)subSamples[i].infoFmGp(); 
+
+            System.out.println(subSamples[i]);
+            System.out.println(I);
+
             if(pr > 0){
                 remainder += (double)pr * I;
             }
 
-            //System.out.println("pr:" + pr + ", I:" + I + ", remainder:" + remainder + ", size: " + size + ", subcnt:" + subcnt[i] + ", infoFmGp:" + subSamples[i].infoFmGp()); //TODO: print all the info you need 
+            //System.out.println("pr:" + pr + ", I:" + I + ", remainder:" + remainder + ", size: " + size + ", subcnt:" + subcnt[i] + ", infoFmGp:" + subSamples[i].infoFmGp() + ", subSamples[i]: " + subSamples[i]); //TODO: print all the info you need 
         }
 
+        //System.out.println("Remainder: " + remainder);
         return remainder;
 
     }
@@ -197,7 +210,7 @@ public class Sample{
 
             }
 
-            subSamples[i] = new Sample(scheme, tempAttList, scheme.attList.get(attIndex).values[i]);
+            subSamples[i] = new Sample(scheme, tempAttList);
             tempAttList = new LinkedList<Example>();
         }
 

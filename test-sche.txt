@@ -1,0 +1,17 @@
+4
+
+va
+2
+AA AB
+
+vb
+3
+BA BB BC
+
+vc
+4
+C1 C2 C3 C4
+
+willDo
+2
+YES NO

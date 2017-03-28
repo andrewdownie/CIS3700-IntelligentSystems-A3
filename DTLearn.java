@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.*;
 
 public class DTLearn{
+    static Scheme scheme;
 
 
     public static void main(String[] args){
@@ -25,18 +26,21 @@ public class DTLearn{
         ///
         /// Scheme setup
         ///
-        Scheme scheme = new Scheme(scheme_contents);
+        scheme = new Scheme(scheme_contents);
         //System.out.println(scheme);
 
         ///
         /// Example setup
         ///
-        Sample sample = new Sample(scheme, data_contents);
+        Sample rootSample = new Sample(scheme, data_contents);
         //System.out.println(sample);
 
+        System.out.println(rootSample);
 
+        //System.out.println("Get remainder: " + rootSample.getRemainder(scheme.attList.get(0)));
         //System.out.println(sample.getRemainder(scheme.attList.get(5)));
-        System.out.println("Attribute choosen: " + sample.getAttribute(scheme.attList));
+        System.out.println("Attribute choosen: " + rootSample.getAttribute(scheme.attList));
+        //learnDecisionTree(rootSample, scheme.attList, "Root");
 
 
 
@@ -46,10 +50,11 @@ public class DTLearn{
 
 
     //... I think sMajor is just a name that gets put on the node, so couldn't I just use the name from the current sample
-    private void learnDecisionTree(Sample g, List<Attribute> attrib, String sMajor){
+   /* private static Node learnDecisionTree(Sample g, List<Attribute> attrib, String sMajor){
 
         if(g.exampleList == null || g.exampleList.size() == 0){
             //return node labeled: sMajor
+            return new Node(g, new Sample(scheme, attrib), "testConnectionAttribute", "testConnectionName");
         }
 
         int singleOutput = g.SingleOutput();
@@ -76,7 +81,8 @@ public class DTLearn{
             System.out.println("Val is: " + val);
         }
 
+        return null;
+    }*/
 
-    }
 
 } 

@@ -4,7 +4,10 @@ public class Example{
 
 
     public Example(int[] example){
-        values = example; 
+        values = new int[example.length];
+        for(int i = 0; i < example.length; i++){
+            values[i] = example[i];
+        }
     }
 
     public int functionOutput(){
@@ -12,6 +15,7 @@ public class Example{
     }
 
     public String toString(){
+
         String output = "{";
 
         for(int i = 0; i < values.length; i++){
@@ -22,6 +26,7 @@ public class Example{
             }            
         }
 
+        
         output += "}";
 
         return output;

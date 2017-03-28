@@ -1,0 +1,5 @@
+va vb vc willDo
+AB BC C1 YES
+AB BA C2 NO
+AA BB C2 NO 
+AA BA C1 NO 
