@@ -2,19 +2,17 @@
 
 
 public class Node{
-    public int connectionAttribute;
-    public int connectionValue;
-    public Sample sample;
-    public Sample parent;
+    String labelOfLink;
+    String labelOfNode;
+    Node parent;
 
-    //I have no idea what this needs to do atm.
-    public Node(Sample parent, Sample sample, int connectionAttribute, int connectionValue){
-        this.connectionAttribute = connectionAttribute;
-        this.connectionValue = connectionValue;
+    public Node(String labelOfNode){
+        this.labelOfNode = labelOfNode;
+    }
 
+    public void LinkNode(Node parent, String labelOfLink){
+        this.labelOfLink = labelOfLink;
         this.parent = parent;
-        this.sample = sample;
-
     }
 
 

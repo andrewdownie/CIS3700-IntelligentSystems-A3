@@ -33,56 +33,45 @@ public class DTLearn{
         /// Example setup
         ///
         Sample rootSample = new Sample(scheme, data_contents);
-        //System.out.println(sample);
 
-        //System.out.println(rootSample);
-
-        //System.out.println("Get remainder: " + rootSample.getRemainder(scheme.attList.get(0)));
-        //System.out.println(sample.getRemainder(scheme.attList.get(5)));
-        System.out.println("Attribute choosen: " + rootSample.getAttribute(scheme.attList));
-        //learnDecisionTree(rootSample, scheme.attList, "Root");
-
-
-
-        //Test infoFmGp(...)
-        //System.out.println(sample.infoFmGp());
+        learnDecisionTree(rootSample, new ArrayList<Attribute>(scheme.attList), "Root sMajor");
     }
 
 
-    //... I think sMajor is just a name that gets put on the node, so couldn't I just use the name from the current sample
-   /* private static Node learnDecisionTree(Sample g, List<Attribute> attrib, String sMajor){
-
-        if(g.exampleList == null || g.exampleList.size() == 0){
-            //return node labeled: sMajor
-            return new Node(g, new Sample(scheme, attrib), "testConnectionAttribute", "testConnectionName");
+    ///
+    /// learnDecisionTree
+    ///
+    public static Node learnDecisionTree(Sample g, List<Attribute> attrib, String sMajor){
+        if(g == null){
+            return new Node("SMajor: " + sMajor);
         }
 
         int singleOutput = g.SingleOutput();
-        if(singleOutput > -1){
-            //label the node singleOutput;
-            //return a node labeld q;
+        int majorityOutput = g.MajorityOutput();
+        
+        if(singleOutput >= 0){
+            return new Node("SingleOutput: " + singleOutput);
         }
 
-
-        if(attrib == null || attrib.size() == 0){
-            //int majorityVal = g.MajorityValue();
-            //return a node labelled majorityValue(g)
+        if(attrib.size() == 0){
+            return new Node("MajorityOutput: " + majorityOutput);
         }
 
 
         Attribute a = g.getAttribute(attrib);
-        
-        //tr = new Decision tree with the root a only;
-        //Sample tr = new Sample();
+        Node tr = new Node("TR a: " + a.name);
+        int m = majorityOutput; 
 
-        int m = g.MajorityValue();
 
         for(String val: a.values){
-            System.out.println("Val is: " + val);
+            System.out.println("Val: " + val);
         }
 
+
         return null;
-    }*/
+    }
+
+
 
 
 } 

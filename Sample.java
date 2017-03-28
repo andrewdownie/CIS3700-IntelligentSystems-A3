@@ -12,6 +12,7 @@ public class Sample{
     Scheme scheme;
     List<Example> exampleList;
 
+
     ///
     /// Sample
     ///         : Create a sample from a scheme, and a text file filled with data that follows the scheme
@@ -46,7 +47,7 @@ public class Sample{
         }
 
         if(!functionOutput.equals(scheme.functionOutput.name)){
-            System.out.println("Function ouput definition(" + functionOutput + ") on first line of data file, did not match function output (" + scheme.functionOutput.name + ") definition of scheme file.");
+            System.out.println("Function output definition(" + functionOutput + ") on first line of data file, did not match function output (" + scheme.functionOutput.name + ") definition of scheme file.");
             System.out.println("Exitting...");
             System.exit(5);
         }
@@ -153,6 +154,10 @@ public class Sample{
         return output;
     }
 
+    
+    ///
+    /// getRemainder
+    ///
     public double getRemainder(Attribute a){
         int size = exampleList.size();
         int m = a.values.length;
@@ -175,9 +180,8 @@ public class Sample{
         }
 
 
-        System.out.println("----");
-
-        System.out.println("Breaking on: " + a.name);
+        //System.out.println("----");
+        //System.out.println("Breaking on: " + a.name);
 
         double remainder = 0;
         for(int i = 0; i < m; i++){
@@ -185,8 +189,8 @@ public class Sample{
             double pr = (double)subcnt[i]/size;
             double I = (double)subSamples[i].infoFmGp(); 
 
-            System.out.println(subSamples[i]);
-            System.out.println(I);
+           // System.out.println(subSamples[i]);
+           // System.out.println(I);
 
             if(pr > 0){
                 remainder += (double)pr * I;
@@ -285,7 +289,7 @@ public class Sample{
         int k = scheme.attList.size() - 1;
         double I = infoFmGp();
 
-        System.out.println(" --- Looking for best attribute");
+        //System.out.println(" --- Looking for best attribute");
 
         Attribute bestA = null;
         double remainder = 0;
@@ -299,7 +303,7 @@ public class Sample{
             if(gain > maxGain){
                 maxGain = gain;
                 bestA = a;
-                System.out.println("\t new bestA: " + bestA.name + ", with a gain of: " + maxGain); 
+                //System.out.println("\t new bestA: " + bestA.name + ", with a gain of: " + maxGain); 
             }
 
         }
@@ -316,9 +320,9 @@ public class Sample{
 
 
     ///
-    /// MajorityValue
+    /// MajorityOutput
     ///         : Finds the FVF of this sample, and returns its index 
-    public int MajorityValue(){
+    public int MajorityOutput(){
         int[] count = CountOuputOfExamples(); 
         int biggestIndex = -1;
         int biggestCount = -1;
