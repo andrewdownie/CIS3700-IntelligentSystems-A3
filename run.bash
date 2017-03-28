@@ -1,1 +1,1 @@
-java DTLearn loan-sche.txt loan-samp.txt;
+java DTLearn rest-sche.txt rest-samp.txt;

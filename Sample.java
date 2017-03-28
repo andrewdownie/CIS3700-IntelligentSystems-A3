@@ -122,6 +122,23 @@ public class Sample{
 
 
     ///
+    /// Sample
+    ///
+    public Sample(Scheme scheme){
+        this.scheme = scheme;
+        exampleList = new LinkedList<Example>();
+    }
+
+
+    ///
+    /// AddExample
+    ///
+    public void AddExample(Example e){
+        exampleList.add(e);
+    }
+
+
+    ///
     /// toString
     ///         : map the indicies of the examples, to the attribute values they correspond to 
     public String toString(){

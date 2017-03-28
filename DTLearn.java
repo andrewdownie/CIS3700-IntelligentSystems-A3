@@ -63,12 +63,23 @@ public class DTLearn{
         int m = majorityOutput; 
 
 
-        for(String val: a.values){
-            System.out.println("Val: " + val);
+        //: For each value of attribute :: wat is this
+        for(String attVal: a.values){
+            Sample subg = new Sample(scheme);
+
+            for(String exVal: g.exampleList.values){
+                if(attVal.equals(exVal)){
+                    subg.AddExample(attVal);
+                }
+            }
+
+            Node subtr = learnDecisionTree(subg, attrib.remove(a), m);
+
+            //subtr.LinkNode(tr, "label of link here");
         }
 
 
-        return null;
+        return tr;
     }
 
 
