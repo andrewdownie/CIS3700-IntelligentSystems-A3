@@ -62,8 +62,8 @@ public class Sample{
 
         //: Go through each example
         for(int i = 1; i < exampleFileLines.length; i++){
-            currentExampleLine = exampleFileLines[i].trim().split("[ ]+", -1);
-            attributeIndexList = new int[scheme.attList.size()];
+            currentExampleLine = exampleFileLines[i].trim().split("\\s+");
+            attributeIndexList = new int[scheme.attList.size() + 1];
 
             String currentExampleOutput = currentExampleLine[currentExampleLine.length - 1];
             currentExampleLine = Arrays.copyOf(currentExampleLine, currentExampleLine.length - 1);
@@ -73,8 +73,10 @@ public class Sample{
             for(int j = 0; j < currentExampleLine.length; j++){
                 currentAttribute = currentExampleLine[j];
 
+
                 currentAttributeIndex = scheme.attList.get(j).IndexOfValue(currentAttribute);
 
+                
                 if(currentAttributeIndex < 0){
                     System.out.println("Attribute: " + scheme.attList.get(j).name + ", does not contain value: " + currentAttribute);
                     System.out.println("Exiting...");
@@ -87,7 +89,6 @@ public class Sample{
 
             //: validate function output
             currentAttributeIndex = scheme.functionOutput.IndexOfValue(currentExampleOutput);
-            System.out.println(currentExampleOutput + " : " + currentAttributeIndex);
 
             if(currentAttributeIndex < 0){
                 System.out.println("Attribute: " + scheme.functionOutput.name + ", does not contain value: " + currentExampleOutput);
@@ -96,6 +97,11 @@ public class Sample{
             }
 
             attributeIndexList[attributeIndexList.length - 1] = currentAttributeIndex;
+
+            /*for(int w = 0; w < attributeIndexList.length; w++){
+                System.out.print(attributeIndexList[w] + ", ");
+            }
+            System.out.println("\n");*/
 
             //: Create new example from the int list representing attribute values, and then add the new example to this scheme's list of attributes
             exampleList.add(new Example(attributeIndexList));
@@ -124,16 +130,22 @@ public class Sample{
             output += "\tExample" + i + ":\t{";
 
             for(int j = 0; j < exampleList.get(i).values.length; j++){
-                int curIndex = exampleList.get(i).values[j];
 
-                output += scheme.attList.get(j).values[curIndex]; 
+                if(j < exampleList.get(i).values.length - 1){
+                    int curIndex = exampleList.get(i).values[j];
+                    output += scheme.attList.get(j).values[curIndex]; 
+                }
+                else{
+                    int curIndex = exampleList.get(i).values[j];
+                    output += scheme.functionOutput.values[curIndex]; 
+                }
 
                 if(j < exampleList.get(i).values.length - 1){
                     output += ", ";
                 }
             }
 
-            output += ", " + exampleList.get(exampleList.size() - 1).values[0];
+            //output += ", " + exampleList.get(exampleList.size() - 1).values[0];
 
             output += "}\n";
         }

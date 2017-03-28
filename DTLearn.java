@@ -35,7 +35,7 @@ public class DTLearn{
         Sample rootSample = new Sample(scheme, data_contents);
         //System.out.println(sample);
 
-        System.out.println(rootSample);
+        //System.out.println(rootSample);
 
         //System.out.println("Get remainder: " + rootSample.getRemainder(scheme.attList.get(0)));
         //System.out.println(sample.getRemainder(scheme.attList.get(5)));
