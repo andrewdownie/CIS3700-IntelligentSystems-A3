@@ -59,23 +59,26 @@ public class DTLearn{
 
 
         Attribute a = g.getAttribute(attrib);
+        int aIndex = scheme.AttributeIndex(a);
+
         Node tr = new Node("TR a: " + a.name);
         int m = majorityOutput; 
 
 
         //: For each value of attribute :: wat is this
-        for(String attVal: a.values){
+        for(int i = 0; i < a.values.length; i++){
             Sample subg = new Sample(scheme);
 
-            for(String exVal: g.exampleList.values){
-                if(attVal.equals(exVal)){
-                    subg.AddExample(attVal);
+            for(int j = 0; j < g.exampleList.size(); j++){
+                if(a.values[i].equals(g.exampleList.get(j).values[aIndex])){
+                    subg.AddExample(g.exampleList.get(j));
                 }
             }
 
-            Node subtr = learnDecisionTree(subg, attrib.remove(a), m);
+            attrib.remove(aIndex);
+            Node subtr = learnDecisionTree(subg, attrib, m + "meow");
 
-            //subtr.LinkNode(tr, "label of link here");
+            subtr.LinkNode(tr, "label of link here");
         }
 
 
