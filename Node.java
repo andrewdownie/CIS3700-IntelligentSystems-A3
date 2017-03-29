@@ -10,6 +10,9 @@ public class Node{
     List<Node> children;
     int depth;
 
+
+    int IndexAtDepth = 0;
+
     public Node(String labelOfNode){
         this.labelOfNode = labelOfNode;
         children = new LinkedList<Node>();

@@ -27,7 +27,6 @@ public class DTLearn{
         /// Scheme setup
         ///
         scheme = new Scheme(scheme_contents);
-        //System.out.println(scheme);
 
         ///
         /// Example setup
@@ -36,11 +35,7 @@ public class DTLearn{
 
         Node rootNode = learnDecisionTree(rootSample, new ArrayList<Attribute>(scheme.attList), "Root sMajor");
 
-
-
-
-        UTIL.PrintLinearDT(rootNode);
-
+        UTIL.PrintDT(rootNode);
 
 
     }
@@ -52,7 +47,7 @@ public class DTLearn{
     ///
     public static Node learnDecisionTree(Sample g, List<Attribute> attrib, String sMajor){
         if(g == null){
-            return new Node("SMajor: " + sMajor);
+            return new Node(sMajor);
         }
 
         //for()
@@ -61,18 +56,18 @@ public class DTLearn{
         int majorityOutput = g.MajorityOutput();
         
         if(singleOutput >= 0){
-            return new Node("SingleOutput: " + scheme.functionOutput.values[singleOutput]);
+            return new Node(scheme.functionOutput.values[singleOutput]);
         }
 
         if(attrib.size() == 0){
-            return new Node("MajorityOutput: " + majorityOutput);
+            return new Node("Majority output: " + majorityOutput);
         }
 
 
         Attribute a = g.getAttribute(attrib);
         int aIndex = scheme.AttributeIndex(a);
 
-        Node tr = new Node("TR a: " + a.name);
+        Node tr = new Node(a.name);
         int m = majorityOutput; 
 
 
@@ -95,7 +90,7 @@ public class DTLearn{
             aList = RemoveAttrib(aList, a);
             Node subtr = learnDecisionTree(subg, aList, scheme.functionOutput.values[m]);
 
-            subtr.LinkNode(tr, "link label: " + scheme.attList.get(aIndex).values[i]);
+            subtr.LinkNode(tr, scheme.attList.get(aIndex).values[i]);
             tr.AddChild(subtr);
             
         }

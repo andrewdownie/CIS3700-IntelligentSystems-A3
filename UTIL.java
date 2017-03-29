@@ -31,7 +31,7 @@ public class UTIL{
 
     ///
     /// ReadEntireFile
-    ///         : Given a full or relative path to a file, return the entirety of file contents as a string, 
+    ///         : Given a full or relative path to a text file, return the entirety of file contents as a string, 
     public static String ReadEntireFile(String filePath){
             String fileContents = "";
 
@@ -48,10 +48,11 @@ public class UTIL{
     }
 
 
+
     ///
-    /// PrintLinearDT
-    ///         : Put this in the util section
-    public static void PrintLinearDT(Node rootNode){
+    /// PrintDT
+    ///         : Prints a decision tree, given the root node
+    public static void PrintDT(Node rootNode){
         //: Linearize the decision tree
         List<Node> linearList = new LinkedList<Node>();
         linearList = LinearizeDT(rootNode, 0, linearList);
@@ -64,9 +65,14 @@ public class UTIL{
             }
         }
 
-        //: Print each depth of the decsision tree
-        for(int i = 0; i < maxDepth + 1; i++){
-            //: Grab all the nodes at the current depth
+        //: Print the root node of the tree
+        System.out.println(rootNode.labelOfNode);
+        System.out.println("0\n");
+
+        //: Go through each depth of the tree 
+        for(int i = 1; i < maxDepth + 1; i++){
+
+            //: Grab all the nodes at the current depth, and add them to a list
             List<Node> currentDepth = new LinkedList<Node>();
             for(Node n: linearList){
                 if(i == n.depth){
@@ -74,21 +80,21 @@ public class UTIL{
                 }
             }
 
-            //: Go through each node at the current depth
-            for(Node n: currentDepth){
-                System.out.println("Current depth: " + n.labelOfNode);
-            }
-            System.out.println("");
+            //: Print the nodes at the same depth
+            PrintDT_AtDepth(currentDepth);
         }
     }
 
+
+
     ///
     /// LinearizeDT 
-    ///         : Put this in the util section
-    public static List<Node> LinearizeDT(Node node, int depth, List<Node> list){
+    ///         : Creates a linear version of a tree using recursion. Given the root node, and an empty list, in which the linear tree will be filled into
+    private static List<Node> LinearizeDT(Node node, int depth, List<Node> list){
         node.depth = depth;
         list.add(node);
         depth++;
+
 
         for(Node n: node.children){
             LinearizeDT(n, depth, list);
@@ -96,6 +102,61 @@ public class UTIL{
 
 
         return list;        
+    }
+
+
+    ///
+    /// PrintDT_AtDepth
+    ///         : Given a list of nodes at the same depth, the nodes will be printed side by side on the command line
+    private static void PrintDT_AtDepth(List<Node> nodes){
+        int size = nodes.size();
+
+/*        for(Node n: nodesAtSameDepth){
+            System.out.print(n.labelOfNode + ", ");
+        }*/
+
+
+        //: Print the parent node of each node
+        for(int i = 0; i < size; i++){
+            System.out.print(nodes.get(i).parent.IndexAtDepth + "          ");
+        }
+        System.out.print("\n");
+
+
+
+        for(int i = 0; i < size; i++){
+            System.out.print("|          ");
+        }
+        System.out.print("\n");
+
+
+        for(int i = 0; i < size; i++){
+            System.out.print("|          ");
+        }
+        System.out.print("\n");
+
+
+        for(int i = 0; i < size; i++){
+            System.out.print("|          ");
+        }
+        System.out.print("\n");
+
+
+        for(int i = 0; i < size; i++){
+            System.out.print("v          ");
+        }
+        System.out.print("\n");
+
+
+        for(int i = 0; i < size; i++){
+            System.out.print(i + "          ");
+            nodes.get(i).IndexAtDepth = i;
+        }
+        System.out.print("\n");
+
+
+        System.out.print("\n");
+
     }
 
 }
