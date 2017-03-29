@@ -34,7 +34,14 @@ public class DTLearn{
         ///
         Sample rootSample = new Sample(scheme, data_contents);
 
-        learnDecisionTree(rootSample, new ArrayList<Attribute>(scheme.attList), "Root sMajor");
+        Node rootNode = learnDecisionTree(rootSample, new ArrayList<Attribute>(scheme.attList), "Root sMajor");
+
+        System.out.println(rootNode.labelOfNode);
+        for(Node n: rootNode.children){
+            System.out.println(n.labelOfNode);
+        }
+
+
     }
 
 
@@ -45,6 +52,8 @@ public class DTLearn{
         if(g == null){
             return new Node("SMajor: " + sMajor);
         }
+
+        //for()
 
         int singleOutput = g.SingleOutput();
         int majorityOutput = g.MajorityOutput();
@@ -65,24 +74,44 @@ public class DTLearn{
         int m = majorityOutput; 
 
 
-        //: For each value of attribute :: wat is this
+        //: For each value of attribute
         for(int i = 0; i < a.values.length; i++){
             Sample subg = new Sample(scheme);
 
             for(int j = 0; j < g.exampleList.size(); j++){
-                if(a.values[i].equals(g.exampleList.get(j).values[aIndex])){
+                //System.out.println("a.values[" + i + "]: " + a.values[i] + ", exampleList(j): " + g.exampleList.get(j).values[aIndex]);
+                if(i == g.exampleList.get(j).values[aIndex]){
                     subg.AddExample(g.exampleList.get(j));
                 }
             }
 
-            attrib.remove(aIndex);
-            Node subtr = learnDecisionTree(subg, attrib, m + "meow");
+            if(subg.exampleList.size() == 0){
+                subg = null;
+            }
+
+            List<Attribute> aList = new LinkedList<Attribute>(attrib);
+            aList = RemoveAttrib(aList, a);
+            Node subtr = learnDecisionTree(subg, aList, m + "meow");
 
             subtr.LinkNode(tr, "label of link here");
+            tr.AddChild(subtr);
+            
         }
 
 
         return tr;
+    }
+
+    public static List<Attribute> RemoveAttrib(List<Attribute> attrib, Attribute a){
+
+        for(int i = 0; i < attrib.size(); i++){
+            if(attrib.get(i).equals(a)){
+                attrib.remove(i);
+            }
+        }
+
+
+        return attrib;
     }
 
 
