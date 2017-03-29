@@ -306,7 +306,8 @@ public class Sample{
         int k = scheme.attList.size() - 1;
         double I = infoFmGp();
 
-        //System.out.println(" --- Looking for best attribute");
+       // System.out.println(" --- Looking for best attribute");
+        
 
         Attribute bestA = null;
         double remainder = 0;

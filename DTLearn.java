@@ -5,6 +5,8 @@ import java.util.*;
 public class DTLearn{
     static Scheme scheme;
 
+    static List<Node> linearList;
+
 
     public static void main(String[] args){
         UTIL.ErrChk_ArgCount(args.length);
@@ -36,11 +38,45 @@ public class DTLearn{
 
         Node rootNode = learnDecisionTree(rootSample, new ArrayList<Attribute>(scheme.attList), "Root sMajor");
 
-        System.out.println(rootNode.labelOfNode);
-        for(Node n: rootNode.children){
-            System.out.println(n.labelOfNode + ", label: " + n.labelOfLink);
+
+
+
+        linearList = new LinkedList<Node>();
+        LinearizeDT(rootNode, 0);
+
+
+        int maxDepth = -1;
+        for(Node n: linearList){
+            if(n.depth > maxDepth){
+                maxDepth = n.depth;
+            }
         }
 
+        for(int i = 0; i < maxDepth + 1; i++){
+            for(Node n: linearList){
+                if(i == n.depth){
+                    System.out.print(n.labelOfNode + ", ");
+                }
+            }
+            System.out.println("");
+        }
+
+
+
+
+    }
+
+    ///
+    /// LinearizeDT 
+    ///
+    public static void LinearizeDT(Node node, int depth){
+        node.depth = depth;
+        linearList.add(node);
+        depth++;
+
+        for(Node n: node.children){
+            LinearizeDT(n, depth);
+        }
 
     }
 
@@ -91,7 +127,7 @@ public class DTLearn{
 
             List<Attribute> aList = new LinkedList<Attribute>(attrib);
             aList = RemoveAttrib(aList, a);
-            Node subtr = learnDecisionTree(subg, aList, m + "meow");
+            Node subtr = learnDecisionTree(subg, aList, scheme.functionOutput.values[m]);
 
             subtr.LinkNode(tr, "link label: " + scheme.attList.get(aIndex).values[i]);
             tr.AddChild(subtr);

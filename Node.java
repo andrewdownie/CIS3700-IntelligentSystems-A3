@@ -8,6 +8,7 @@ public class Node{
     String labelOfNode;
     Node parent;
     List<Node> children;
+    int depth;
 
     public Node(String labelOfNode){
         this.labelOfNode = labelOfNode;
