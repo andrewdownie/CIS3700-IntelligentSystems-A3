@@ -131,19 +131,27 @@ public class UTIL{
 
 
         for(int i = 0; i < size; i++){
-            System.out.print("|          ");
-        }
-        System.out.print("\n");
+            System.out.print("|" + nodes.get(i).labelOfLink);
 
-
-        for(int i = 0; i < size; i++){
-            System.out.print("|          ");
+            for(int j = nodes.get(i).labelOfLink.length(); j <= 9; j++){
+                System.out.print(" ");
+            }
         }
         System.out.print("\n");
 
 
         for(int i = 0; i < size; i++){
             System.out.print("v          ");
+        }
+        System.out.print("\n");
+
+
+        for(int i = 0; i < size; i++){
+            System.out.print(nodes.get(i).labelOfNode);
+
+            for(int j = nodes.get(i).labelOfNode.length(); j <= 10; j++){
+                System.out.print(" ");
+            }
         }
         System.out.print("\n");
 
