@@ -5,8 +5,6 @@ import java.util.*;
 public class DTLearn{
     static Scheme scheme;
 
-    static List<Node> linearList;
-
 
     public static void main(String[] args){
         UTIL.ErrChk_ArgCount(args.length);
@@ -41,44 +39,12 @@ public class DTLearn{
 
 
 
-        linearList = new LinkedList<Node>();
-        LinearizeDT(rootNode, 0);
-
-
-        int maxDepth = -1;
-        for(Node n: linearList){
-            if(n.depth > maxDepth){
-                maxDepth = n.depth;
-            }
-        }
-
-        for(int i = 0; i < maxDepth + 1; i++){
-            for(Node n: linearList){
-                if(i == n.depth){
-                    System.out.print(n.labelOfNode + ", ");
-                }
-            }
-            System.out.println("");
-        }
-
+        UTIL.PrintLinearDT(rootNode);
 
 
 
     }
 
-    ///
-    /// LinearizeDT 
-    ///
-    public static void LinearizeDT(Node node, int depth){
-        node.depth = depth;
-        linearList.add(node);
-        depth++;
-
-        for(Node n: node.children){
-            LinearizeDT(n, depth);
-        }
-
-    }
 
 
     ///
