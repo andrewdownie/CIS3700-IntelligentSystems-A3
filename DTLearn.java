@@ -38,7 +38,7 @@ public class DTLearn{
 
         System.out.println(rootNode.labelOfNode);
         for(Node n: rootNode.children){
-            System.out.println(n.labelOfNode);
+            System.out.println(n.labelOfNode + ", label: " + n.labelOfLink);
         }
 
 
@@ -59,7 +59,7 @@ public class DTLearn{
         int majorityOutput = g.MajorityOutput();
         
         if(singleOutput >= 0){
-            return new Node("SingleOutput: " + singleOutput);
+            return new Node("SingleOutput: " + scheme.functionOutput.values[singleOutput]);
         }
 
         if(attrib.size() == 0){
@@ -93,7 +93,7 @@ public class DTLearn{
             aList = RemoveAttrib(aList, a);
             Node subtr = learnDecisionTree(subg, aList, m + "meow");
 
-            subtr.LinkNode(tr, "label of link here");
+            subtr.LinkNode(tr, "link label: " + scheme.attList.get(aIndex).values[i]);
             tr.AddChild(subtr);
             
         }
