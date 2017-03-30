@@ -50,7 +50,6 @@ public class DTLearn{
             return new Node(sMajor);
         }
 
-        //for()
 
         int singleOutput = g.SingleOutput();
         int majorityOutput = g.MajorityOutput();
@@ -60,7 +59,7 @@ public class DTLearn{
         }
 
         if(attrib.size() == 0){
-            return new Node("Majority output: " + majorityOutput);
+            return new Node(g.scheme.functionOutput.values[majorityOutput]);
         }
 
 
@@ -98,6 +97,10 @@ public class DTLearn{
         return tr;
     }
 
+
+    ///
+    /// RemoveAttrib
+    ///         : Removes the attribute passed in, from the list passed in. If the attribute is not found, it simply returns the original list.
     public static List<Attribute> RemoveAttrib(List<Attribute> attrib, Attribute a){
 
         for(int i = 0; i < attrib.size(); i++){

@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.*;
 
 
-
-//TODO: do I need to minus one from k (scheme.attList.size()), since I include the function output in this list
-
 public class Sample{
     Scheme scheme;
     List<Example> exampleList;
@@ -119,7 +116,7 @@ public class Sample{
 
     ///
     /// Sample
-    ///
+    ///         : Create a sample with an empty exampleList
     public Sample(Scheme scheme){
         this.scheme = scheme;
         exampleList = new LinkedList<Example>();
@@ -128,7 +125,7 @@ public class Sample{
 
     ///
     /// AddExample
-    ///
+    ///         : An an example to the exampleList
     public void AddExample(Example e){
         exampleList.add(e);
     }
@@ -136,7 +133,7 @@ public class Sample{
 
     ///
     /// toString
-    ///         : map the indicies of the examples, to the attribute values they correspond to 
+    ///         : map the indicies of the examples, to the attribute values they correspond to to make things human readable
     public String toString(){
         String output = "Example list:\n";
 
