@@ -11,6 +11,7 @@ public class Node{
     int depth;
 
 
+    //: The index for this node from left to right for its depth in the tree
     int IndexAtDepth = 0;
 
     public Node(String labelOfNode){

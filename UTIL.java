@@ -111,9 +111,6 @@ public class UTIL{
     private static void PrintDT_AtDepth(List<Node> nodes){
         int size = nodes.size();
 
-/*        for(Node n: nodesAtSameDepth){
-            System.out.print(n.labelOfNode + ", ");
-        }*/
 
 
         //: Print the parent node of each node
@@ -123,13 +120,14 @@ public class UTIL{
         System.out.print("\n");
 
 
-
+        //: Print a line for each node
         for(int i = 0; i < size; i++){
             System.out.print("|          ");
         }
         System.out.print("\n");
 
 
+        //: Print a line for each node, with the name of the attribut value that connects this node to its parent
         for(int i = 0; i < size; i++){
             System.out.print("|" + nodes.get(i).labelOfLink);
 
@@ -140,12 +138,14 @@ public class UTIL{
         System.out.print("\n");
 
 
+        //: Print a chevron for each node
         for(int i = 0; i < size; i++){
             System.out.print("v          ");
         }
         System.out.print("\n");
 
 
+        //: Print the label/output of each node
         for(int i = 0; i < size; i++){
             System.out.print(nodes.get(i).labelOfNode);
 
@@ -156,6 +156,7 @@ public class UTIL{
         System.out.print("\n");
 
 
+        //: Print each nodes index at the current depth
         for(int i = 0; i < size; i++){
             System.out.print(i + "          ");
             nodes.get(i).IndexAtDepth = i;
