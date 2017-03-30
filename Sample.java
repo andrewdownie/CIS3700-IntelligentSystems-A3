@@ -99,10 +99,6 @@ public class Sample{
 
             attributeIndexList[attributeIndexList.length - 1] = currentAttributeIndex;
 
-            /*for(int w = 0; w < attributeIndexList.length; w++){
-                System.out.print(attributeIndexList[w] + ", ");
-            }
-            System.out.println("\n");*/
 
             //: Create new example from the int list representing attribute values, and then add the new example to this scheme's list of attributes
             exampleList.add(new Example(attributeIndexList));
@@ -163,7 +159,6 @@ public class Sample{
                 }
             }
 
-            //output += ", " + exampleList.get(exampleList.size() - 1).values[0];
 
             output += "}\n";
         }
@@ -181,14 +176,8 @@ public class Sample{
 
         Sample[] subSamples = CreateSubSamples(a);
 
-        for(Sample s: subSamples){
-            //System.out.println("S is: " + s);
-        }
 
 
-        /*for(Sample s: subSamples){// Print what subsamples are being generated
-            System.out.println(s.toString());
-        }*/
 
         int[] subcnt = new int[m];
 
@@ -197,8 +186,6 @@ public class Sample{
         }
 
 
-        //System.out.println("----");
-        //System.out.println("Breaking on: " + a.name);
 
         double remainder = 0;
         for(int i = 0; i < m; i++){
@@ -206,17 +193,13 @@ public class Sample{
             double pr = (double)subcnt[i]/size;
             double I = (double)subSamples[i].infoFmGp(); 
 
-           // System.out.println(subSamples[i]);
-           // System.out.println(I);
 
             if(pr > 0){
                 remainder += (double)pr * I;
             }
 
-            //System.out.println("pr:" + pr + ", I:" + I + ", remainder:" + remainder + ", size: " + size + ", subcnt:" + subcnt[i] + ", infoFmGp:" + subSamples[i].infoFmGp() + ", subSamples[i]: " + subSamples[i]); //TODO: print all the info you need 
         }
 
-        //System.out.println("Remainder: " + remainder);
         return remainder;
 
     }
@@ -289,7 +272,6 @@ public class Sample{
         double I = 0;
         for(int i = 0; i < outputCount; i++){
             double ratio = (double)count[i] / size;
-            //System.out.println("Ratio: " + ratio + ",\t---- count[i]: " + count[i] + ", size: " + size);
             if(ratio > 0){
                 I = I - (ratio * Log2(ratio));
             }
@@ -306,7 +288,6 @@ public class Sample{
         int k = scheme.attList.size() - 1;
         double I = infoFmGp();
 
-       // System.out.println(" --- Looking for best attribute");
         
 
         Attribute bestA = null;
@@ -321,7 +302,6 @@ public class Sample{
             if(gain > maxGain){
                 maxGain = gain;
                 bestA = a;
-                //System.out.println("\t new bestA: " + bestA.name + ", with a gain of: " + maxGain); 
             }
 
         }

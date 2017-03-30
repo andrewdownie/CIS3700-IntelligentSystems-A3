@@ -76,7 +76,6 @@ public class DTLearn{
             Sample subg = new Sample(scheme);
 
             for(int j = 0; j < g.exampleList.size(); j++){
-                //System.out.println("a.values[" + i + "]: " + a.values[i] + ", exampleList(j): " + g.exampleList.get(j).values[aIndex]);
                 if(i == g.exampleList.get(j).values[aIndex]){
                     subg.AddExample(g.exampleList.get(j));
                 }
